@@ -110,10 +110,10 @@ Collaboration<br>
 
 <h4>8. AWS ec2, rds, route53 설정협업과 도메인 설정 </h4>
 
- - 배포를 위한 ec2 설정 - 참여자 : [ 김민수(팀장) GITHUB ](), [ 김윤석 GITHUB ]()
- - DB재설정을 위한 RDS 설정  - 참여자 : [ 김민수(팀장) GITHUB ](), [ 김윤석 GITHUB ]()
- - HTTPS 설정을 위한 ROUTE53 설정 - 참여자 : [ 김민수(팀장) GITHUB ]()
- - 도메인 설정 - 참여자 : [ 김민수(팀장) GITHUB ]()
+ - 배포를 위한 ec2 설정 - 참여자 : [ 김민수(팀장) GITHUB ](https://github.com/MSKY219), [ 김윤석 GITHUB ](https://github.com/rjrjsktl)
+ - DB재설정을 위한 RDS 설정  - 참여자 : [ 김민수(팀장) GITHUB ](https://github.com/MSKY219), [ 김윤석 GITHUB ](https://github.com/rjrjsktl)
+ - HTTPS 설정을 위한 ROUTE53 설정 - 참여자 : [ 김민수(팀장) GITHUB ](https://github.com/MSKY219)
+ - 도메인 설정 - 참여자 : [ 김민수(팀장) GITHUB ](https://github.com/MSKY219)
 
 ## 프로젝트 진행 중 어려웠던 상황
 
@@ -153,6 +153,7 @@ JSP에서는 JAVASCRIPT방식으로 처리하고있었고 결국 토큰이 두�
 <h4>오타</h4>
 정말 많이 괴롭혔던 부분이다..
 가장 압권은 토큰을 확인하기 위한 주소를 .com이 아닌 .cm으로 작성한 것,
+
 XSS가 적용이 안되길래 엄청난 시간을 투자해서 코드를 추가하였지만 결국 .. escapeXml = "ture" 였던 것도 꽤..
 인상적이였다...
 
