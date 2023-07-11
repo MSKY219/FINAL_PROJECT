@@ -134,8 +134,8 @@ String unescapedContent = StringEscapeUtils.unescapeHtml4(mTmdetail.getMtmConten
 		mTmdetail.setMtmContent(replacedContent);
 		mTmdetail.setMtmRepContent(replacedContent2);
 ```
-1. 게시판의 상세 내용 부분이였는데 컨텐츠가 두군데 있었습니다.
-2. 본문 하나만 처리는 했는데 생각해보니 추가적으로 답글처리를 추가로 해야하는 과정에 있어서 시간이 급박해서 그랬는지<br>
+- 게시판의 상세 내용 부분이였는데 컨텐츠가 두군데 있었습니다.
+- 본문 하나만 처리는 했는데 생각해보니 추가적으로 답글처리를 추가로 해야하는 과정에 있어서 시간이 급박해서 그랬는지<br>
 어떻게 처리할지 우왕좌왕하고있었고 뭐 답은 위와같이 답글에도 똑같이 적용하면 되는것 그것뿐이었습니다..
 급하게 처리한것이기 때문에 옳은지 옳지못한 코드인지 확인할 방법과 시간이 없었습니다. 출력은 제대로 가능하니 옳은 코드라고 생각합니다..
 
