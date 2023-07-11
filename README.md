@@ -74,6 +74,35 @@ Collaboration<br>
 
  - 주소표시줄에 강제값을 입력하여 접근 차단 기능 구현
  - 이벤트 핸들러를 이용한 세션, 잘못된접근 차단 기능 구현
+```
+  @ExceptionHandler(MissingRequestHeaderException.class)
+	    public ModelAndView handleMissingRequestHeaderException(MissingRequestHeaderException ex, HttpServletRequest request) {
+	        ModelAndView modelAndView = new ModelAndView();
+	        modelAndView.addObject("exception", ex);
+	        modelAndView.addObject("url", request.getRequestURL());
+	        modelAndView.setViewName("/helpDesk/error"); 
+	        return modelAndView;
+	    }
+	  
+	  @ExceptionHandler(NullPointerException.class)
+	  public ModelAndView handleNullPointerException(NullPointerException ex, HttpServletRequest request) {
+	      ModelAndView modelAndView = new ModelAndView();
+	      modelAndView.addObject("exception", ex);
+	      modelAndView.addObject("url", request.getRequestURL());
+	      modelAndView.setViewName("/helpDesk/error");  
+	      return modelAndView;
+	  }
+	  
+	  @ExceptionHandler(HttpSessionRequiredException.class)
+	    public ModelAndView handleHttpSessionRequiredException(HttpSessionRequiredException ex, HttpServletRequest request) {
+	        ModelAndView modelAndView = new ModelAndView();
+	        modelAndView.addObject("exception", ex);
+	        modelAndView.addObject("url", request.getRequestURL());
+	        modelAndView.setViewName("/helpDesk/error");  
+	        return modelAndView;
+	
+	  }
+```
 
 <h4>7. 네이버 XSS escapeXML 데이터 정제 </h4>
 
@@ -86,4 +115,50 @@ Collaboration<br>
  - HTTPS 설정을 위한 ROUTE53 설정 - 참여자 : [ 김민수(팀장) GITHUB ]()
  - 도메인 설정 - 참여자 : [ 김민수(팀장) GITHUB ]()
 
-## 프로젝트 후기
+## 프로젝트 진행 중 어려웠던 상황
+
+<h4 >XSS 데이터 출력 오류 </h4>
+프로젝트 마지막 날 XSS 설정으로 인하여 데이터들이 '<br>'이 포함되어 마구 출력되는것을 확인하였다.<br>
+JSP에 있는 태그에 <escapeXml = "true">가 원인이였다. XSS를 위해서 삽입한 코드이지만..
+진짜 시간이 얼마 남지 않았기 때문에 급하게 진행하였었고 엄청 아찔한 경험이였다.
+데이터를 불러오고 삽입할 때 컨트롤러에 아래와 같이 작성하여 급한 불을 껐었다.
+
+```
+String unescapedContent = StringEscapeUtils.unescapeHtml4(mTmdetail.getMtmContent());
+		String unescapedContent2 = StringEscapeUtils.unescapeHtml4(mTmdetail.getMtmRepContent());
+        String replacedContent = unescapedContent.replaceAll("<br\\s*/?>", "\n");
+        String replacedContent2 = "";
+        if (unescapedContent2 != null) {
+            replacedContent2 = unescapedContent2.replaceAll("<br\\s*/?>", "\n");
+        }
+		mTmdetail.setMtmContent(replacedContent);
+		mTmdetail.setMtmRepContent(replacedContent2);
+```
+
+새로운 코드를 작성하며 어려웠던 점
+1. 게시판의 상세 내용 부분이였는데 컨텐츠가 두군데 있었다. 본문과 답글
+2. 본문 하나만 처리는 했는데 생각해보니 추가적으로 답글처리를 추가로 해야하는 과정에 있어서 시간이 급박해서 그랬는지<br>
+어떻게 처리할지 우왕좌왕하고있었고 뭐 답은 위와같이 답글에도 똑같이 적용하면 되는것 그것뿐이였다..
+
+급하게 처리한것이기 때문에 옳은지 옳지못한 코드인지 확인할 방법이 없었다. 출력은 제대로 가능하니 옳은 코드라고 생각한다....
+
+
+<h4> 네이버 토큰 처리 </h4>
+카카오 로그인은 문제없이 구현하였는데 네이버 로그인을 추가하면서 문제가 발생하였다.
+너무 기초적인 문제였지만 어이없게도 4~5시간 이상 소요된 것으로 기억한다.
+토큰을 처리하는 방식을 REST API 로 설정하였으나
+JSP에서는 JAVASCRIPT방식으로 처리하고있었고 결국 토큰이 두번 불러와지면서 만료가 되었던 기억이 있다.
+모든 라인에 디버그를 하고 나서야 뭐가 문제인지 알아차렸던 기억이 남는다..
+
+<h4>오타</h4>
+정말 많이 괴롭혔던 부분이다..
+가장 압권은 토큰을 확인하기 위한 주소를 .com이 아닌 .cm으로 작성한 것,
+XSS가 적용이 안되길래 엄청난 시간을 투자해서 코드를 추가하였지만 결국 .. escapeXml = "ture" 였던 것도 꽤..
+인상적이였다...
+
+
+## 프로젝트 진행 후기
+
+모두가 한마음 한뜻으로 뭉치기는 정말 어렵다는걸 다시한번 느꼈다.
+밀어주고 끌어주고 격려하고 함께 으쌰으쌰 할 수 있도록 노력해야했었는데 그런 노력이 조금 부족했던 것 같다..
+그래도 결과적으로는.. 무사히 종료되긴 하였지만.. 
