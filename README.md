@@ -134,12 +134,9 @@ String unescapedContent = StringEscapeUtils.unescapeHtml4(mTmdetail.getMtmConten
 		mTmdetail.setMtmContent(replacedContent);
 		mTmdetail.setMtmRepContent(replacedContent2);
 ```
-
-새로운 코드를 작성하며 어려웠던 점
 1. 게시판의 상세 내용 부분이였는데 컨텐츠가 두군데 있었다. 본문과 답글
 2. 본문 하나만 처리는 했는데 생각해보니 추가적으로 답글처리를 추가로 해야하는 과정에 있어서 시간이 급박해서 그랬는지<br>
 어떻게 처리할지 우왕좌왕하고있었고 뭐 답은 위와같이 답글에도 똑같이 적용하면 되는것 그것뿐이였다..
-
 급하게 처리한것이기 때문에 옳은지 옳지못한 코드인지 확인할 방법이 없었다. 출력은 제대로 가능하니 옳은 코드라고 생각한다....
 
 
@@ -149,6 +146,7 @@ String unescapedContent = StringEscapeUtils.unescapeHtml4(mTmdetail.getMtmConten
 토큰을 처리하는 방식을 REST API 로 설정하였으나
 JSP에서는 JAVASCRIPT방식으로 처리하고있었고 결국 토큰이 두번 불러와지면서 만료가 되었던 기억이 있다.
 모든 라인에 디버그를 하고 나서야 뭐가 문제인지 알아차렸던 기억이 남는다..
+
 
 <h4>오타</h4>
 정말 많이 괴롭혔던 부분이다..
